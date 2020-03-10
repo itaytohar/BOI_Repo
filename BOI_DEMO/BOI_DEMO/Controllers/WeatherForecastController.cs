@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using log4net.Appender;
 
 namespace BOI_DEMO.Controllers
 {
@@ -21,6 +22,7 @@ namespace BOI_DEMO.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
+            var logm = log4net.LogManager.Flush(0);
         }
 
         [HttpGet]
@@ -32,6 +34,7 @@ namespace BOI_DEMO.Controllers
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
+                
             })
             .ToArray();
         }
